@@ -12,63 +12,58 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteMovie = exports.create = exports.update = exports.get = exports.getAll = void 0;
-const movie_model_1 = __importDefault(require("../models/movie.model"));
+exports.create = exports.update = exports.deleteUser = exports.get = exports.getAll = void 0;
+const user_model_1 = __importDefault(require("../models/user.model"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield movie_model_1.default.find({}).limit(30);
+        const result = yield user_model_1.default.find({}).limit(30);
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
-    ;
 });
 exports.getAll = getAll;
 const get = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield movie_model_1.default.findById({ _id });
+        const result = yield user_model_1.default.findById({ _id });
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
-    ;
 });
 exports.get = get;
 const create = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield movie_model_1.default.create(req.body);
+        const result = yield user_model_1.default.create(req.body);
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
-    ;
 });
 exports.create = create;
 const update = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield movie_model_1.default.findByIdAndUpdate({ _id }, req.body);
+        const result = yield user_model_1.default.findByIdAndUpdate({ _id }, req.body);
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
-    ;
 });
 exports.update = update;
-const deleteMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { _id } = req.params;
     try {
-        const result = yield movie_model_1.default.findByIdAndDelete({ _id });
+        const result = yield user_model_1.default.findByIdAndUpdate({ _id });
         res.json({ status: true, result });
     }
     catch (err) {
         res.json({ status: false, message: err });
     }
-    ;
 });
-exports.deleteMovie = deleteMovie;
+exports.deleteUser = deleteUser;

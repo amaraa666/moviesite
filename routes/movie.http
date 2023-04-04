@@ -1,0 +1,29 @@
+###
+GET http://localhost:6000/api/movies
+
+
+###
+GET http://localhost:6000/api/movies/573a1391f29313caabcd8cef
+
+
+###
+DELETE http://localhost:6000/api/movies/573a1390f29313caabcd4135
+
+
+###
+PUT http://localhost:6000/api/movies/573a1390f29313caabcd50e5
+Content-Type: application/json
+
+{ 
+    "directors": ["Suhbat"]
+}
+
+###
+POST http://localhost:6000/api/movies
+Content-Type: application/json
+
+{
+    "title": "Mongol humuus alt",
+    "rating": 9.9,
+    "directors": ["amaraa" , "tom amaraa"]
+}

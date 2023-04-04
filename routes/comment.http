@@ -1,0 +1,31 @@
+###
+GET http://localhost:6000/api/comment
+
+###
+GET http://localhost:6000/api/comment/5a9427648b0beebeb6957a4b
+
+
+###
+DELETE http://localhost:6000/api/comment/642cb1ebde1ef62846359dde
+
+###
+PUT http://localhost:6000/api/comment/5a9427648b0beebeb6957a4b
+Content-Type: application/json
+
+{
+
+} 
+
+###
+POST http://localhost:6000/api/comment
+Content-Type: application/json
+
+{
+      "name": "Gregor Clegane",
+      "email": "hafthór_júlíus_björnsson@gameofthron.es",
+      "movie_id": "573a1390f29313caabcd50e5",
+      "text": [
+        "Voluptatum voluptatem nam et accusamus ullam qui explicabo exercitationem. Ut sint facilis aut similique dolorum non. Necessitatibus unde molestias incidunt asperiores nesciunt molestias."
+      ],
+      "date": "2015-02-08T01:28:23.000Z"
+}

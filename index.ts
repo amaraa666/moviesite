@@ -3,7 +3,10 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import TheaterRoute from './routes/theater.route';
 import MovieRoute from './routes/movie.route';
+import UserRoute from './routes/user.route';
+import CommentRoute from './routes/comment.route';
 import cors from 'cors';
+
 
 const app: Express = express();
 dotenv.config();
@@ -19,6 +22,8 @@ mongoose.connect(url)
 app.use(express.json())
 app.use('/api', TheaterRoute);
 app.use('/api', MovieRoute);
+app.use('/api' , UserRoute);
+app.use('/api', CommentRoute );
 
 
 app.use(cors());
