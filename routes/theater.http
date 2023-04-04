@@ -1,0 +1,31 @@
+###
+GET http://localhost:6000/api/theaters
+
+###
+GET http://localhost:6000/api/theaters/59a47286cfa9a3a73e51e730
+
+###
+POST http://localhost:6000/api/theaters
+Content-type: application/json
+
+{
+ "location": {
+        "address": {
+          "street1": "sapapa",
+          "city": "Ub",
+          "state": "BZD",
+          "zipcode": "6"
+        }
+      },
+      "theaterId": 1003
+}
+
+###
+PUT http://localhost:6000/api/theaters/642b842cb16a688e5471bb74
+Content-Type: application/json
+
+{
+    "city": "amarbat"
+}
+###
+DELETE http://localhost:6000/api/theaters/59a47286cfa9a3a73e51e730
