@@ -13,20 +13,22 @@ dotenv.config();
 
 const url: string = process.env.MONGO_DB_URL || "";
 
-mongoose.connect(url)
+mongoose
+    .connect(url)
     .then(() => console.log('db connected'))
     .catch((err) => console.log(err))
 
 
 
+
+app.use(cors());
 app.use(express.json())
 app.use('/api', TheaterRoute);
 app.use('/api', MovieRoute);
-app.use('/api' , UserRoute);
-app.use('/api', CommentRoute );
+app.use('/api', UserRoute);
+app.use('/api', CommentRoute);
 
 
-app.use(cors());
 
 app.get('/', (req: Request, res: Response) => {
     res.json({ status: true, message: 'hello api' });

@@ -1,17 +1,17 @@
 ###
-GET http://localhost:6000/api/movies
+GET http://localhost:6060/api/movies
 
 
 ###
-GET http://localhost:6000/api/movies/573a1391f29313caabcd8cef
+GET http://localhost:6060/api/movies/573a1391f29313caabcd8cef
 
 
 ###
-DELETE http://localhost:6000/api/movies/573a1390f29313caabcd4135
+DELETE http://localhost:6060/api/movies/573a1390f29313caabcd4135
 
 
 ###
-PUT http://localhost:6000/api/movies/573a1390f29313caabcd50e5
+PUT http://localhost:6060/api/movies/573a1390f29313caabcd50e5
 Content-Type: application/json
 
 { 
@@ -19,7 +19,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:6000/api/movies
+POST http://localhost:6060/api/movies
 Content-Type: application/json
 
 {
