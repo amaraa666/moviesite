@@ -1,5 +1,14 @@
 ###
-GET http://localhost:6060/api/movies
+GEt http://localhost:6060/api/movies
+Content-Type: application/json
+
+{
+    "pageSize": 1,
+    "filter": {
+        "searchText": "as",
+        "rated": 2
+    }
+}
 
 
 ###
@@ -26,4 +35,16 @@ Content-Type: application/json
     "title": "Mongol humuus alt",
     "rating": 9.9,
     "directors": ["amaraa" , "tom amaraa"]
+}
+
+### 
+POST http://localhost:6060/api/moviesfilter
+Content-Type: application/json
+
+{
+    "pageSize": 1,
+    "filter": {
+        "searchText": "as",
+        "rated": 2
+    }
 }

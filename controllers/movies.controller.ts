@@ -1,14 +1,49 @@
 import { Request, Response } from "express";
 import Movies from "../models/movie.model";
 
-const getAll = async (req: Request, res: Response) => {
+const getAll = async (req: Request, res: Response): Promise<void> => {
+    const { pageSize, filter } = req.body;
+    const count = pageSize * 30 + 1
     try {
-        const result = await Movies.find({}).limit(30);
+        if (filter.isFiltered) {
+            const result = await Movies.
+                find({
+                    $or: [
+                        { title: { $regex: filter.searchText } },
+                        { plot: { $regex: filter.searchText } },
+                        { fullplot: { $regex: filter.searchText } }
+                    ]
+                }).limit(30)
+                .skip(count);
+            res.json({ status: true, result })
+            return
+        }
+        const result = await Movies.find({})
         res.json({ status: true, result })
     } catch (err) {
         res.json({ status: false, message: err });
     };
 };
+
+// const filter = async (req: Request, res: Response) => {
+//     const { pageSize, filter } = req.body
+
+//     const count = pageSize * 30;
+//     try {
+//         const result = await Movies.
+//             find({
+//                 $or: [
+//                     { title: { $regex: filter.searchText } },
+//                     { plot: { $regex: filter.searchText } },
+//                     { fullplot: { $regex: filter.searchText } }
+//                 ]
+//             }).limit(30)
+//             .skip(count);
+//         res.json({ status: true, result })
+//     } catch (err) {
+//         res.json({ status: false, message: err });
+//     }
+// }
 
 const get = async (req: Request, res: Response) => {
     const { _id } = req.params;
