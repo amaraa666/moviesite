@@ -1,12 +1,12 @@
 ###
-GEt http://localhost:6060/api/movies
+POST http://localhost:6060/api/movies
 Content-Type: application/json
 
 {
     "pageSize": 1,
     "filter": {
-        "searchText": "as",
-        "rated": 2
+        "isFiltered": true,
+        "searchText": "42nd Street"
     }
 }
 

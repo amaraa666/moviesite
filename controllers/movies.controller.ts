@@ -6,6 +6,7 @@ const getAll = async (req: Request, res: Response): Promise<void> => {
     const count = pageSize * 30 + 1
     try {
         if (filter.isFiltered) {
+            const totalRows = await Movies.find({}).count();
             const result = await Movies.
                 find({
                     $or: [
@@ -14,12 +15,12 @@ const getAll = async (req: Request, res: Response): Promise<void> => {
                         { fullplot: { $regex: filter.searchText } }
                     ]
                 }).limit(30)
-                .skip(count);
-            res.json({ status: true, result })
+            res.json({ status: true, result, totalRows })
             return
         }
-        const result = await Movies.find({})
-        res.json({ status: true, result })
+        const totalRows = await Movies.find({}).count();
+        const result = await Movies.find({}).limit(30)
+        res.json({ status: true, result, totalRows })
     } catch (err) {
         res.json({ status: false, message: err });
     };
