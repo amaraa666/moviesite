@@ -15,9 +15,31 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteMovie = exports.create = exports.update = exports.get = exports.getAll = void 0;
 const movie_model_1 = __importDefault(require("../models/movie.model"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { myVal, myPage } = req.body;
+    const { filter } = myVal;
+    const count = (myPage - 1) * 30;
     try {
-        const result = yield movie_model_1.default.find({}).limit(30);
-        res.json({ status: true, result });
+        if (filter.isFiltered) {
+            const totalRows = yield movie_model_1.default.find({ $or: [
+                    { title: { $regex: filter.searchText } },
+                    { plot: { $regex: filter.searchText } },
+                    { fullplot: { $regex: filter.searchText } }
+                ] })
+                .count();
+            const result = yield movie_model_1.default.
+                find({
+                $or: [
+                    { title: { $regex: filter.searchText } },
+                    { plot: { $regex: filter.searchText } },
+                    { fullplot: { $regex: filter.searchText } }
+                ]
+            }).limit(30).skip(count);
+            res.json({ status: true, result, totalRows });
+            return;
+        }
+        const totalRows = yield movie_model_1.default.find({}).count();
+        const result = yield movie_model_1.default.find({}).limit(30).skip(count);
+        res.json({ status: true, result, totalRows });
     }
     catch (err) {
         res.json({ status: false, message: err });
