@@ -3,23 +3,22 @@ import Movies from "../models/movie.model";
 
 const getAll = async (req: Request, res: Response): Promise<void> => {
     const {myVal , myPage} = req.body
-    const {  filter } = myVal;
     const count = (myPage -1) * 30 
     try {
-        if (filter.isFiltered) {
+        if (myVal.isFiltered) {
             const totalRows = await Movies.find(
                 {$or: [
-                        { title: { $regex: filter.searchText } },
-                        { plot: { $regex: filter.searchText } },
-                        { fullplot: { $regex: filter.searchText } }
+                        { title: { $regex: myVal.searchText } },
+                        { plot: { $regex: myVal.searchText } },
+                        { fullplot: { $regex: myVal.searchText } }
                     ]})
                     .count();
             const result = await Movies.
                 find({
                     $or: [
-                        { title: { $regex: filter.searchText } },
-                        { plot: { $regex: filter.searchText } },
-                        { fullplot: { $regex: filter.searchText } }
+                        { title: { $regex: myVal.searchText } }
+                        { plot: { $regex: myVal.searchText } },
+                        { fullplot: { $regex: myVal.searchText } }
                     ]
                 }).limit(30).skip(count)
             res.json({ status: true, result, totalRows })

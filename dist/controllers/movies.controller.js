@@ -16,22 +16,21 @@ exports.deleteMovie = exports.create = exports.update = exports.get = exports.ge
 const movie_model_1 = __importDefault(require("../models/movie.model"));
 const getAll = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { myVal, myPage } = req.body;
-    const { filter } = myVal;
     const count = (myPage - 1) * 30;
     try {
-        if (filter.isFiltered) {
+        if (myVal.isFiltered) {
             const totalRows = yield movie_model_1.default.find({ $or: [
-                    { title: { $regex: filter.searchText } },
-                    { plot: { $regex: filter.searchText } },
-                    { fullplot: { $regex: filter.searchText } }
+                    { title: { $regex: myVal.searchText } },
+                    { plot: { $regex: myVal.searchText } },
+                    { fullplot: { $regex: myVal.searchText } }
                 ] })
                 .count();
             const result = yield movie_model_1.default.
                 find({
                 $or: [
-                    { title: { $regex: filter.searchText } },
-                    { plot: { $regex: filter.searchText } },
-                    { fullplot: { $regex: filter.searchText } }
+                    { title: { $regex: myVal.searchText } }
+                    // { plot: { $regex: myVal.searchText } },
+                    // { fullplot: { $regex: myVal.searchText } }
                 ]
             }).limit(30).skip(count);
             res.json({ status: true, result, totalRows });
